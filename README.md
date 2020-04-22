@@ -42,7 +42,13 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 5. Modifique la coleción de POSTMAN con NEWMAN de tal forma que pueda enviar 10 peticiones concurrentes. Verifique los resultados y presente un informe.
 
+![](images/solucion/resultadosNewman.png)
+
 6. Cree una nueva Function que resuleva el problema de Fibonacci pero esta vez utilice un enfoque recursivo con memoization. Pruebe la función varias veces, después no haga nada por al menos 5 minutos. Pruebe la función de nuevo con los valores anteriores. ¿Cuál es el comportamiento?.
+
+![](images/solucion/FiboMemorizado.png)
+
+Gracias a la memorización mejora el rendimiento debido a que cuando se consulta un número menor, como este se guarda en memoria, al realizar una consulta mayor es menos costoso, llegando incluso a ser constante en peticiones de números menores.
 
 **Preguntas**
 
@@ -113,9 +119,13 @@ Los siguientes planes ya son para casos especificos donde se busca un mejor dese
 
 * ¿Por qué la memoization falla o no funciona de forma correcta?
 
+La memorización falla o no funciona correctamente debido a que esta funcion de llamado recursivo tiene un límite de iteraciones o llamados recursivos que puede hacer y aún con la memorización es costoso realizar esta operación, llegando a colapsar o fallar en algún caso muy grande.
 
 * ¿Cómo funciona el sistema de facturación de las Function App?
 
 Las funciones se facturan sobre la base del consumo de recursos observado, medido en gigabytes-segundos (GB-s). El consumo de recursos observado se calcula multiplicando el tamaño medio de la memoria en gigabytes por el tiempo en milisegundos que se tarda en ejecutar la función. La memoria utilizada por una función se mide redondeando al alza los 128 MB más cercanos, hasta el tamaño máximo de memoria de 1.536 MB, y el tiempo de ejecución se calcula redondeando al alza los 1 ms más cercanos. El tiempo mínimo de ejecución y la memoria para la ejecución de una sola función es de 100 ms y 128 mb respectivamente.
 
 * Informe
+
+Si ejecutamos las funciones alojadas en azure, podemos evidenciar que no soporta grandes casos, en el caso 1000000 la función ya no funcionaba mientras que en la versión iterativa si. Esto se debe a que la función iterativa no tiene la restricción del número de iteraciones y la función recurrente si.
+Pero gracias a la memorización, se puede evidenciar un mejor rendimiento en los casos vistos ya que este al consultar un número, puede hacer uso de los guardados anteriormente, ahorrando procesamiento y tiempo. Lo malo de esto es que como la función recursiva tiene un número máximo de llamados recursivos, no puede llegar a hacer grandes casos como fibonacci (1000000) mientras que la función iterativa si.
